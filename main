@@ -1,0 +1,212 @@
+#Вариант 14: Млекопитающее, парнокопытное, птица, животное.
+from classes import Mammal, Artiodactyl, Birds, Animal
+import os # для очистки консоли
+
+
+def Add(list):
+    os.system('CLS') # для очистки консоли
+    print("1)Млекопитающее\n2)Парнокопытное\n3)Птица\n4)Животное")
+    a = int(input("Что вы хотите добавить?"))
+    if a == 1:
+        os.system('CLS') # для очистки консоли
+        list.append(Mammal(str(input("Введите название животного:")), str(input("Введите тип питания животного:")), str(input("Введите среду обитания животного:"))))
+        print("Объект добавлен")
+    elif a == 2:
+        os.system('CLS') # для очистки консоли
+        list.append(Artiodactyl(str(input("Введите название животного:")), str(input("Введите тип питания животного:")), str(input("Введите среду обитания животного:")), str(input("Введите подотряд животного:"))))
+        print("Объект добавлен")
+    elif a == 3:
+        os.system('CLS') # для очистки консоли
+        list.append(Birds(str(input("Введите название животного:")), str(input("Введите тип питания животного:")), str(input("Введите отряд животного:"))))
+        print("Объект добавлен")
+    elif a == 4:
+        os.system('CLS') # для очистки консоли
+        list.append(Animal(str(input("Введите название животного:")), str(input("Введите тип питания животного:"))))
+        print("Объект добавлен")
+    else:
+        print("Ошибка ввода")
+
+def Show(list):
+    os.system('CLS') # для очистки консоли
+    k = 1
+    for obj in list:
+        print("{}) {} ".format(k ,obj))
+        k += 1
+
+def Edit(list):
+    os.system('CLS') # для очистки консоли
+    Show(list)
+    i = int(input("Какой объект вы хотите изменить?"))
+    if i in range(1, len(list) + 1):
+        a = list[i - 1]
+        os.system('CLS') # для очистки консоли
+        print("1)Название животного\n2)Тип питания")
+        if isinstance(a, Artiodactyl): 
+            print("3)Среда обитания\n4)Подотряд животного")
+        elif isinstance(a, Mammal):
+            print("3)Среда обитания")
+        elif isinstance(a, Birds):
+            print("3)Отряд животного")
+        else:
+            print()
+        b = int(input("Что вы хотите изменить?"))
+        if b == 1:
+            os.system('CLS') # для очистки консоли
+            a.name = str(input("Введите новое название:"))
+            print("Объект изменен")
+        elif b == 2:
+            os.system('CLS') # для очистки консоли
+            a.eating = str(input("Введите новый тип питания:"))
+            print("Объект изменен")
+        elif b == 3:
+            if isinstance(a, Mammal) or isinstance(a, Artiodactyl):
+                os.system('CLS') # для очистки консоли
+                a.type = str(input("Введите новую среду обитания:"))
+                print("Объект изменен")
+            elif isinstance(a, Birds):
+                os.system('CLS') # для очистки консоли
+                a.squad = str(input("Введите новый отряд животного:"))
+                print("Объект изменен")
+            else:
+                print("Ошибка ввода")
+        elif b == 4:
+            if isinstance(a, Artiodactyl):
+                os.system('CLS') # для очистки консоли
+                a.suborder = str(input("Введите новый подотряд животного:"))
+                print("Объект изменен")
+            else:
+                print("Ошибка ввода")
+
+    else:
+        print("Неправильный номер объекта")
+
+def Find(list):
+    os.system('CLS') # для очистки консоли
+    list1 = []
+    print("1)Класс\n2)Название\n3)Тип питания\n4)Среда обитания\n5)Подотряд\n6)Отряд")
+    a = int(input("Выберите по какому критерию осуществить поиск: "))
+    if a == 1:
+        print("1)Млекопитающее\n2)Парнокопытное\n3)Птица\n4)Животное")
+        b = int(input("Выьерите по какому классу осуществить поиск: "))
+        if b == 1:
+            for obj in list:
+                if isinstance(obj, Mammal):
+                    list1.append(obj)
+            os.system('CLS') # для очистки консоли
+            if len(list1) == 0:
+                print("Нет таких элементов")
+            else:
+                Show(list1)
+        elif b == 2:
+            for obj in list:
+                if isinstance(obj, Artiodactyl):
+                    list1.append(obj)
+            os.system('CLS') # для очистки консоли
+            if len(list1) == 0:
+                print("Нет таких элементов")
+            else:
+                Show(list1)
+        elif b == 3:
+            for obj in list:
+                if isinstance(obj, Birds):
+                    list1.append(obj)
+            os.system('CLS') # для очистки консоли
+            if len(list1) == 0:
+                print("Нет таких элементов")
+            else:
+                Show(list1)
+        elif b == 4:
+            for obj in list:
+                if isinstance(obj, Animal):
+                    list1.append(obj)
+            os.system('CLS') # для очистки консоли
+            if len(list1) == 0:
+                print("Нет таких элементов")
+            else:
+                Show(list1)
+        else:
+            print("Ошибка ввода")
+    elif a == 2:
+        b = str(input("Введите название:"))
+        for obj in list:
+                if obj.name == b:
+                    list1.append(obj)
+        os.system('CLS') # для очистки консоли
+        if len(list1) == 0:
+                print("Нет таких элементов")
+        else:
+            Show(list1)
+    elif a == 3:
+        b = str(input("Введите тип питания:"))
+        for obj in list:
+                if obj.eating == b:
+                    list1.append(obj)
+        os.system('CLS') # для очистки консоли
+        if len(list1) == 0:
+                print("Нет таких элементов")
+        else:
+            Show(list1)
+    elif a == 4:
+        b = str(input("Введите среду обитания:"))
+        for obj in list:
+                if isinstance(obj, Mammal):
+                    if obj.type == b:
+                        list1.append(obj)
+        os.system('CLS') # для очистки консоли
+        if len(list1) == 0:
+                print("Нет таких элементов")
+        else:
+            Show(list1)
+    elif a == 5:
+        b = str(input("Введите подотряд животного:"))
+        for obj in list:
+                if isinstance(obj, Artiodactyl):
+                    if obj.suborder == b:
+                        list1.append(obj)
+        if len(list1) == 0:
+                print("Нет таких элементов")
+        else:
+            Show(list1)
+    elif a == 6:
+        b = str(input("Введите отряд животного:"))
+        for obj in list:
+                if isinstance(obj, Birds):
+                    if obj.squad == b:
+                        list1.append(obj)
+        os.system('CLS') # для очистки консоли
+        if len(list1) == 0:
+                print("Нет таких элементов")
+        else:
+            Show(list1)
+    else:
+        print("Ошибка ввода")
+
+
+def Delete(list):
+    os.system('CLS') # для очистки консоли
+    Show(list)
+    a = int(input("Какой объект вы хотите удалить?"))
+    if a in range(1, len(list) + 1):
+        list.pop(a - 1)
+    else:
+        print("Неправильный номер объекта")
+        
+list = []
+
+while True:
+    print("1)Показать\n2)Добавить\n3)Удалить\n4)Изменить\n5)Поиск\n6)Выход")
+    a = int(input("Выберите операцию:"))
+    if a == 1:
+        Show(list)
+    elif a == 2:
+        Add(list)
+    elif a == 3:
+        Delete(list)
+    elif a == 4:
+        Edit(list)
+    elif a == 5:
+        Find(list)
+    elif a == 6:
+        break
+
+
