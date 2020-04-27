@@ -1,0 +1,81 @@
+class Animal:
+    def __init__(self, name, eating):
+        self.__name = name
+        self.__eating = eating         #способ питания(травоядное, плотоядное и т.д.)
+
+    def __del__(self):
+        print(self.name,"удален из памяти")
+
+    @property
+    def name(self):
+        return self.__name
+    @name.setter
+    def name(self,name):
+        self.__name = name 
+
+    @property
+    def eating(self):
+        return self.__eating
+    @eating.setter
+    def eating(self,eating):
+        self.__eating = eating 
+
+    def display_info(self):
+        print(self.__str__())
+
+    def __str__(self):
+        return "Имя животного: {} \t Способ питания: {}".format(self.name, self.eating)
+
+class Mammal(Animal): # млекопитающие
+    def __init__(self, name, eating, type):
+        Animal.__init__(self, name, eating)
+        self.__type = type #Наземные, водные формы и т.д.
+
+    def __del__(self):
+        print(self.name,"удален из памяти")
+
+    @property
+    def type(self):
+        return self.__type
+    @type.setter
+    def type(self,type):
+        self.__type = type 
+
+    def __str__(self):
+        return "Имя млекопитающего: {} \t Способ питания: {} \t Среда обитания: {}".format(self.name, self.eating, self.type)
+
+class Artiodactyl(Mammal): # парнокопытные
+    def __init__(self, name, eating, type, suborder):
+        Mammal.__init__(self, name, eating, type)
+        self.__suborder = suborder #подотряд
+
+    def __del__(self):
+        print(self.name,"удален из памяти")
+
+    @property
+    def suborder(self):
+        return self.__suborder
+    @suborder.setter
+    def suborder(self,suborder):
+        self.__suborder = suborder
+
+    def __str__(self):
+        return "Имя парнокопытного: {} \t Способ питания: {} \t Среда обитания: {} \t Подотряд: {}".format(self.name, self.eating, self.type, self.suborder)
+
+class Birds(Animal):
+    def __init__(self, name, eating, squad):
+        Animal.__init__(self, name, eating)
+        self.__squad = squad #попугаеобразные, рябкообразные и т.д.
+
+    def __del__(self):
+        print(self.name,"удален из памяти")
+
+    @property
+    def squad(self):
+        return self.__squad
+    @squad.setter
+    def squad(self,squad):
+        self.__squad = squad
+
+    def __str__(self):
+        return "Имя птицы: {} \t Способ питания: {} \t Отряд: {}".format(self.name, self.eating, self.squad)
